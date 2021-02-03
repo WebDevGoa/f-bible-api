@@ -2,7 +2,7 @@
 // file would prevent dups
 // const fs = require('fs');
 const path = require('path');
-
+// Use this checking in development only
 // // check if .env exists
 // if (!fs.existsSync(path.resolve('.env'))) {
 //   throw new TypeError('.env File Not Found. Forgot to create one?');

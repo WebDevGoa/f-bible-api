@@ -1,20 +1,5 @@
 const Story = require('../database/models/storyModel');
 
-exports.getAllStories = async (req, res) => {
-  try {
-    const stories = await Story.find();
-    res.status(200).json({
-      status: 'success',
-      data: stories,
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
-
 exports.createStory = async (req, res) => {
   try {
     const { name, author, image, heading } = req.body;
@@ -24,7 +9,6 @@ exports.createStory = async (req, res) => {
         message: 'Fields cannot be empty',
       });
     }
-
     const newStory = await Story.create(req.body);
     res.status(201).json({
       success: 'success',
@@ -38,7 +22,6 @@ exports.createStory = async (req, res) => {
   }
 };
 
-//get story by id
 exports.getStory = async (req, res) => {
   try {
     const story = await Story.findOne({ _id: req.params.storyId });
@@ -53,7 +36,7 @@ exports.getStory = async (req, res) => {
       data: story,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(400).json({
       status: 'fail',
       message: error,
@@ -61,12 +44,11 @@ exports.getStory = async (req, res) => {
   }
 };
 
-//get all stories
-exports.getAllStories = async (req, res)=>{
-  try{
-    const stories = await Story.find()
-    
-    if(!stories){
+exports.getAllStories = async (req, res) => {
+  try {
+    const stories = await Story.find();
+
+    if (!stories) {
       res.status(400).json({
         status: 'fail',
         message: 'No stories found',
@@ -74,18 +56,16 @@ exports.getAllStories = async (req, res)=>{
     }
 
     res.status(200).json({
-      status: "success",
-      message: stories
-    })
-
-  } catch(error){
-    
+      status: 'success',
+      message: stories,
+    });
+  } catch (error) {
     res.status(400).json({
-      status: "fail",
-      message: error
-    })
+      status: 'fail',
+      message: error,
+    });
   }
-}
+};
 
 exports.updateStory = async (req, res) => {
   try {
@@ -115,6 +95,7 @@ exports.updateStory = async (req, res) => {
     });
   }
 };
+
 exports.deleteStory = async (req, res) => {
   try {
     const story_id = req.params.storyId;
@@ -123,15 +104,12 @@ exports.deleteStory = async (req, res) => {
     }
     await Story.findOneAndDelete({ _id: story_id });
     res.json({
-      status:'success',
-      message:'Deleted Story Successfully'
-      
+      status: 'success',
+      message: 'Deleted Story Successfully',
     });
-
-  
   } catch (err) {
     res.json({
-      status:'fail', 
+      status: 'fail',
       message: err,
     });
   }

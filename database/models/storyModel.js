@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 
 const storySchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      trim: true,
-      required: [true, 'Please provide a name'],
-    },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

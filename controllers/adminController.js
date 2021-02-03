@@ -88,6 +88,7 @@ exports.approvalRequests = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({
+      status: 'success',
       message: 'Error!',
     });
   }
